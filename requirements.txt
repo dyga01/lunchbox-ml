@@ -1,0 +1,6 @@
+Typer
+docker
+# mojo
+scikit-learn
+pandas
+numpy

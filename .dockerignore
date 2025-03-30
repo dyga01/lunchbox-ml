@@ -1,0 +1,14 @@
+# Ignore the following files and directories when building the Docker image
+*.pyc
+__pycache__/
+*.pyo
+*.pyd
+.env
+*.db
+*.log
+*.tmp
+*.DS_Store
+.vscode/
+.idea/
+tests/
+docs/
