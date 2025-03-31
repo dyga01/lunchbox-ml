@@ -9,4 +9,7 @@ pip install -e .
 
 ```text
 lunchbox --help
+lunchbox train --model test_models.lstm_model
+lunchbox test --model test_models.gru_model
+lunchbox deploy --model test_models.cnn_model
 ```
