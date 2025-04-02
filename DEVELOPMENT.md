@@ -33,10 +33,12 @@ lunchbox deploy --model test_models.cnn_model
 
 - documentation of everything
 - linting with ruff
-- logo and finalized readme.md documentation
+- logo
+- finalized readme
 - license in repo?
 
 ## TODO LIST
 
 - connect the files to allow for dev soon
 - how can i integrate mojo project with this cli tool -- > utilize subprocess to run the mojo command
+- setup test models

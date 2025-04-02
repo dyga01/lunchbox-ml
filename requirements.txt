@@ -3,3 +3,5 @@ docker
 scikit-learn
 pandas
 numpy
+matplotlib
+torch

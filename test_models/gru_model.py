@@ -4,10 +4,10 @@ import torch.nn as nn
 import matplotlib.pyplot as plt
 import numpy as np
 import time
-from .data_preprocessing import preprocess_data
+from data_preprocessing import preprocess_data
 
 # Path to the dataset
-data_path = "../data/Metro_total_monthly_payment_downpayment_0.20_uc_sfrcondo_tier_0.33_0.67_sm_sa_month.csv"
+data_path = "Metro_total_monthly_payment_downpayment_0.20_uc_sfrcondo_tier_0.33_0.67_sm_sa_month.csv"
 # Preprocess the data
 X_train, X_test, y_train, y_test, scaler_X, scaler_y = preprocess_data(data_path, sequence_length=10)
 
