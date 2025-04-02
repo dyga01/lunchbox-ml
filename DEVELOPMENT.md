@@ -4,16 +4,16 @@
 python3 -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
-curl https://get.modular.com | sh
 pip install -e .
 ```
 
 ```text
+curl https://get.modular.com | sh
 curl -ssL https://magic.modular.com/5cf2c264-40cf-42be-bf0f-aa05b5ab6fd1 | bash
 export PATH=$HOME/.modular/bin:$PATH
 echo 'export PATH=$HOME/.modular/bin:$PATH' >> ~/.zshrc
-magic init life --format mojoproject
-cd life
+magic init optimizer --format mojoproject
+cd optimizer
 magic shell
 mojo hello.mojo
 ```
@@ -39,3 +39,4 @@ lunchbox deploy --model test_models.cnn_model
 ## TODO LIST
 
 - connect the files to allow for dev soon
+- how can i integrate mojo project with this cli tool -- > utilize subprocess to run the mojo command
