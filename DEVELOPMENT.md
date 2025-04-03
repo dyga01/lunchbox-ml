@@ -20,7 +20,7 @@ mojo hello.mojo
 
 ```text
 lunchbox --help
-lunchbox train --model ./test_models/lstm_model.py
+lunchbox train --model ./test_models/gru_model.py
 lunchbox deploy --model test_models.cnn_model
 ```
 
@@ -54,4 +54,5 @@ train cli command should:
 - run the model and ...
 - report the model output
 - the time to run
+- save the model w training data
 - other metrics???
