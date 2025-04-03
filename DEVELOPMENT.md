@@ -20,7 +20,7 @@ mojo hello.mojo
 
 ```text
 lunchbox --help
-lunchbox train --model test_models.lstm_model
+lunchbox train --model ./test_models/lstm_model.py
 lunchbox deploy --model test_models.cnn_model
 ```
 
