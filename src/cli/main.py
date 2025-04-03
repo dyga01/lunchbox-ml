@@ -8,16 +8,16 @@ app = Typer()
 @app.command()
 def train(
     model: str = Option(..., "--model", "-m", help="Path to the model file"),
-    report_output: bool = Option(False, "--report-output", "-o", help="Report model output"),
+    output: bool = Option(False, "--output", "-o", help="Report model output"),
     benchmark: bool = Option(False, "--benchmark", "-b", help="Report performance benchmarks"),
+    optimize: str = Option("none", "--optimize", "-opt", help="Optimization technique to use (none, cpu, gpu, memory, mixed)"),
 ):
     """Train a machine learning model."""
     model = Path(model)
     if model.is_file():
-        print(f"\nTraining model from file: {model}\n")
         # Run the model and print the models results based on the command
-        metrics = run_model(model, report_output, benchmark)
-        print_benchmark_results(model.name, metrics, show_output=report_output, show_error=True)
+        metrics = run_model(model, output, benchmark, optimize)
+        print_benchmark_results(model.name, metrics, show_output=output, show_error=True)
     else:
         print(f"Error: Model file {model} does not exist.")
 

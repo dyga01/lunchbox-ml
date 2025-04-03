@@ -40,19 +40,12 @@ lunchbox deploy --model test_models.cnn_model
 
 ## TODO LIST
 
-- connect the files to allow for dev soon
 - how can i integrate mojo project with this cli tool -- > utilize subprocess to run the mojo command
 
-if inputted model file, i must be able to run the model:
+- ensure that all of the configuration options with simple python work!!
+
+if inputted model file, i must be able to run the model: flag this stuff!!
 
 - with just normal python
 - with mojo
 - other config
-
-train cli command should:
-
-- run the model and ...
-- report the model output
-- the time to run
-- save the model w training data
-- other metrics???
