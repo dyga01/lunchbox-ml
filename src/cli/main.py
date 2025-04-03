@@ -1,7 +1,8 @@
 from pathlib import Path
 from typing import Optional
 from typer import Typer, Option
-from src.train.train import run_model, print_benchmark_results
+from src.train.train import run_model
+from src.train.pretty_print import print_benchmark_results
 
 app = Typer()
 
