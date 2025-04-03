@@ -1,16 +1,17 @@
+from pathlib import Path
 from typer import Typer, Option
 
 app = Typer()
 
 @app.command()
-def train(model_name: str = Option(..., "--model", "-m", help="Name of the model to train")):
+def train(model: str = Option(..., "--model", "-m", help="Path to the model file")):
     """Train a machine learning model."""
-    print(f"Training model: {model_name}")
-
-@app.command()
-def test(model_name: str = Option(..., "--model", "-m", help="Name of the model to test")):
-    """Test a machine learning model."""
-    print(f"Testing model: {model_name}")
+    model = Path(model)
+    if model.is_file():
+        print(f"Training model from file: {model}")
+        # Add logic to load and train the model from the file
+    else:
+        print(f"Error: Model file {model} does not exist.")
 
 @app.command()
 def deploy(model_name: str = Option(..., "--model", "-m", help="Name of the model to deploy")):

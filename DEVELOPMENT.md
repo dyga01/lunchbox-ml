@@ -21,7 +21,6 @@ mojo hello.mojo
 ```text
 lunchbox --help
 lunchbox train --model test_models.lstm_model
-lunchbox test --model test_models.gru_model
 lunchbox deploy --model test_models.cnn_model
 ```
 
@@ -31,14 +30,28 @@ lunchbox deploy --model test_models.cnn_model
 - implement deploy functionality by automatically generating a dockerfile
 - test lastly
 
+- error handling
 - documentation of everything
 - linting with ruff
 - logo
 - finalized readme
+- make it public?
 - license in repo?
 
 ## TODO LIST
 
 - connect the files to allow for dev soon
 - how can i integrate mojo project with this cli tool -- > utilize subprocess to run the mojo command
-- setup test models
+
+if inputted model file, i must be able to run the model:
+
+- with just normal python
+- with mojo
+- other config
+
+train cli command should:
+
+- run the model and ...
+- report the model output
+- the time to run
+- other metrics???
