@@ -1,6 +1,7 @@
 import subprocess
 import time
 import os
+import psutil
 from .pretty_print import print_running_message
 
 def run_model(model_path, output=False, benchmark=False, optimize=False):
@@ -20,49 +21,59 @@ def run_model(model_path, output=False, benchmark=False, optimize=False):
     
         start_time = time.time()
 
+        # Initialize benchmarking variables
+        peak_memory = 0
+        cpu_usage = []
+
         # Get the directory containing the model file
         model_dir = os.path.dirname(os.path.abspath(model_path))
         model_file = os.path.basename(model_path)
 
         # Run the model using subprocess from the model's directory
-        result = subprocess.run(
+        process = subprocess.Popen(
             ["python", model_file],
-            capture_output=True,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
             text=True,
-            check=True,
-            cwd=model_dir  # This sets the working directory for the subprocess
+            cwd=model_dir
         )
-        
+
+        # Monitor resource usage if benchmarking is enabled
+        if benchmark:
+            while process.poll() is None:
+                try:
+                    # Record CPU usage
+                    cpu_usage.append(psutil.cpu_percent(interval=0.1))
+                    # Record peak memory usage
+                    proc = psutil.Process(process.pid)
+                    peak_memory = max(peak_memory, proc.memory_info().rss / (1024 * 1024))  # Convert to MB
+                except psutil.ZombieProcess:
+                    # Handle zombie process gracefully
+                    break
+                except psutil.NoSuchProcess:
+                    # Process no longer exists
+                    break
+                except psutil.AccessDenied:
+                    # Access denied to process info
+                    break
+
+        stdout, stderr = process.communicate()
         end_time = time.time()
         execution_time = end_time - start_time
 
         # Collect metrics
         metrics = {
-            "output": result.stdout.strip(),
-            "error": result.stderr.strip(),
+            "output": stdout.strip(),
+            "error": stderr.strip(),
             "execution_time": execution_time,
-            "return_code": result.returncode
+            "return_code": process.returncode,
         }
-        
-        # Report results based on flags
+
+        # Add benchmarking metrics if enabled
         if benchmark:
-            print(f"\n{'='*50}")
-            print(f"BENCHMARK RESULTS:")
-            print(f"{'='*50}")
-            print(f"Execution time: {execution_time:.2f} seconds")
-            print(f"Return code: {result.returncode}")
-            print(f"{'='*50}\n")
-        
-        if output:
-            print(f"\n{'='*50}")
-            print(f"MODEL OUTPUT:")
-            print(f"{'='*50}")
-            print(metrics["output"])
-            if metrics["error"]:
-                print(f"\nERRORS/WARNINGS:")
-                print(metrics["error"])
-            print(f"{'='*50}\n")
-        
+            metrics["peak_memory"] = peak_memory
+            metrics["average_cpu"] = sum(cpu_usage) / len(cpu_usage) if cpu_usage else 0
+
         return metrics
 
     except subprocess.CalledProcessError as e:

@@ -96,6 +96,12 @@ def print_benchmark_results(model_name, metrics, show_output=True, show_error=Tr
             line_padding = CONTENT_WIDTH - len(display_line)  # Use uncolored length for padding
             print(f"{BOLD}{CYAN}║{RESET} {colored_line}{' ' * line_padding} {BOLD}{CYAN}║{RESET}")
     
+    # Print benchmarking metrics if available
+    if "peak_memory" in metrics and "average_cpu" in metrics:
+        print(f"{BOLD}{CYAN}╠{'─' * BOX_WIDTH}╣{RESET}")
+        print(f"{BOLD}{CYAN}║{RESET} Peak Memory Usage: {metrics['peak_memory']:.2f} MB{' ' * (CONTENT_WIDTH - 25)}{BOLD}{CYAN}║{RESET}")
+        print(f"{BOLD}{CYAN}║{RESET} Average CPU Usage: {metrics['average_cpu']:.2f}%{' ' * (CONTENT_WIDTH - 25)}{BOLD}{CYAN}║{RESET}")
+    
     # Summary
     print(f"{BOLD}{CYAN}╠{'─' * BOX_WIDTH}╣{RESET}")
     
@@ -129,7 +135,7 @@ def print_running_message(model_path):
     model_name = os.path.basename(model_path)
     
     # Print initial message
-    print(f"{BOLD}{CYAN}▶ Running model:{RESET} {MAGENTA}{model_name}{RESET}")
+    print(f"\n{BOLD}{CYAN}▶ Running model:{RESET} {MAGENTA}{model_name}{RESET}")
     
     # Show a brief animation (3 cycles)
     for _ in range(3):

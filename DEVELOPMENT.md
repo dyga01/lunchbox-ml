@@ -21,7 +21,8 @@ mojo hello.mojo
 ```text
 lunchbox --help
 lunchbox train --model ./test_models/gru_model.py
-lunchbox deploy --model test_models.cnn_model
+lunchbox train --model ./test_models/gru_model.py --output
+lunchbox train --model ./test_models/gru_model.py --output --benchmark
 ```
 
 ## Final tasks
@@ -49,3 +50,5 @@ if inputted model file, i must be able to run the model: flag this stuff!!
 - with just normal python
 - with mojo
 - other config
+
+- implement benchmark functionality, and then implement simple mojo functionality
