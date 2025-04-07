@@ -11,7 +11,7 @@ def train(
     model: str = Option(..., "--model", "-m", help="Path to the model file"),
     output: bool = Option(False, "--output", "-o", help="Report model output"),
     benchmark: bool = Option(False, "--benchmark", "-b", help="Report performance benchmarks"),
-    optimize: str = Option("none", "--optimize", "-opt", help="Optimization technique to use (none, cpu, gpu, memory, mixed)"),
+    optimize: str = Option("none", "--optimize", "-opt", help="Optimization technique to use (none, mojo)"),
 ):
     """Train a machine learning model."""
     model = Path(model)

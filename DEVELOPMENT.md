@@ -15,8 +15,8 @@ echo 'export PATH=$HOME/.modular/bin:$PATH' >> ~/.zshrc
 magic init optimizer --format mojoproject
 cd optimizer
 magic shell
-exit --> to exit the mojo shell
 mojo hello.mojo
+exit --> to exit the mojo shell
 ```
 
 ```text
@@ -25,6 +25,7 @@ lunchbox train --model ./test_models/gru_model.py
 lunchbox train --model ./test_models/gru_model.py --output
 lunchbox train --model ./test_models/gru_model.py --output --benchmark
 lunchbox train --model ./test_models/gru_model.py --output --benchmark --optimize mojo
+lunchbox train --model ./test_models/gru_model.py --optimize mojo
 ```
 
 ## Final tasks

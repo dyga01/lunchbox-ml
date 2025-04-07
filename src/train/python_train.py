@@ -3,6 +3,7 @@ import time
 import os
 import psutil
 from .pretty_print import print_running_message
+from .mojo_train import run_mojo
 
 def run_model(model_path, output=False, benchmark=False, optimize=False):
     """
@@ -30,51 +31,55 @@ def run_model(model_path, output=False, benchmark=False, optimize=False):
         model_file = os.path.basename(model_path)
 
         # Run the model using subprocess from the model's directory
-        process = subprocess.Popen(
-            ["python", model_file],
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE,
-            text=True,
-            cwd=model_dir
-        )
+        if optimize and optimize.lower() == "mojo":
+            run_mojo(optimize="mojo")
+            return  # Exit after running Mojo optimization
+        else:
+            process = subprocess.Popen(
+                ["python", model_file],
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE,
+                text=True,
+                cwd=model_dir
+            )
 
-        # Monitor resource usage if benchmarking is enabled
-        if benchmark:
-            while process.poll() is None:
-                try:
-                    # Record CPU usage
-                    cpu_usage.append(psutil.cpu_percent(interval=0.1))
-                    # Record peak memory usage
-                    proc = psutil.Process(process.pid)
-                    peak_memory = max(peak_memory, proc.memory_info().rss / (1024 * 1024))  # Convert to MB
-                except psutil.ZombieProcess:
-                    # Handle zombie process gracefully
-                    break
-                except psutil.NoSuchProcess:
-                    # Process no longer exists
-                    break
-                except psutil.AccessDenied:
-                    # Access denied to process info
-                    break
+            # Monitor resource usage if benchmarking is enabled
+            if benchmark:
+                while process.poll() is None:
+                    try:
+                        # Record CPU usage
+                        cpu_usage.append(psutil.cpu_percent(interval=0.1))
+                        # Record peak memory usage
+                        proc = psutil.Process(process.pid)
+                        peak_memory = max(peak_memory, proc.memory_info().rss / (1024 * 1024))  # Convert to MB
+                    except psutil.ZombieProcess:
+                        # Handle zombie process gracefully
+                        break
+                    except psutil.NoSuchProcess:
+                        # Process no longer exists
+                        break
+                    except psutil.AccessDenied:
+                        # Access denied to process info
+                        break
 
-        stdout, stderr = process.communicate()
-        end_time = time.time()
-        execution_time = end_time - start_time
+            stdout, stderr = process.communicate()
+            end_time = time.time()
+            execution_time = end_time - start_time
 
-        # Collect metrics
-        metrics = {
-            "output": stdout.strip(),
-            "error": stderr.strip(),
-            "execution_time": execution_time,
-            "return_code": process.returncode,
-        }
+            # Collect metrics
+            metrics = {
+                "output": stdout.strip(),
+                "error": stderr.strip(),
+                "execution_time": execution_time,
+                "return_code": process.returncode,
+            }
 
-        # Add benchmarking metrics if enabled
-        if benchmark:
-            metrics["peak_memory"] = peak_memory
-            metrics["average_cpu"] = sum(cpu_usage) / len(cpu_usage) if cpu_usage else 0
+            # Add benchmarking metrics if enabled
+            if benchmark:
+                metrics["peak_memory"] = peak_memory
+                metrics["average_cpu"] = sum(cpu_usage) / len(cpu_usage) if cpu_usage else 0
 
-        return metrics
+            return metrics
 
     except subprocess.CalledProcessError as e:
         error_info = {
