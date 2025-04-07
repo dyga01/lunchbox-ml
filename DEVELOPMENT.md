@@ -43,12 +43,8 @@ lunchbox train --model ./test_models/gru_model.py --output --benchmark
 
 - how can i integrate mojo project with this cli tool -- > utilize subprocess to run the mojo command
 
-- ensure that all of the configuration options with simple python work!!
-
 if inputted model file, i must be able to run the model: flag this stuff!!
 
 - with just normal python
 - with mojo
 - other config
-
-- implement benchmark functionality, and then implement simple mojo functionality

@@ -34,6 +34,11 @@ def print_benchmark_results(model_name, metrics, show_output=True, show_error=Tr
     # Header
     print(f"\n{BOLD}{CYAN}{'╔' + '═' * BOX_WIDTH + '╗'}{RESET}")
     
+    # Title section with model name
+    title = f"MODEL: {os.path.basename(model_name)}"
+    title_padding = CONTENT_WIDTH - len(title)
+    print(f"{BOLD}{CYAN}║{RESET} {BOLD}{title}{RESET}{' ' * title_padding} {BOLD}{CYAN}║{RESET}")
+    
     # Success status
     success = metrics['return_code'] == 0
     status_color = GREEN if success else RED
@@ -42,28 +47,46 @@ def print_benchmark_results(model_name, metrics, show_output=True, show_error=Tr
     # Execution metrics
     execution_time = metrics['execution_time']
     time_color = GREEN if execution_time < 10 else (YELLOW if execution_time < 30 else RED)
-    
-    # Fixed time formatting
-    time_str = f"{execution_time:.2f}"
-    display_time = f"Execution time: {time_color}{time_str} seconds{RESET}"
-    visual_length = len(f"Execution time: {time_str} seconds")
-    time_padding = CONTENT_WIDTH - visual_length
-    print(f"{BOLD}{CYAN}║{RESET} {display_time}{' ' * time_padding} {BOLD}{CYAN}║{RESET}")
-    
-    # Fixed return code formatting
-    return_code_str = str(metrics['return_code'])
-    display_rc = f"Return code: {status_color}{return_code_str}{RESET}"
-    visual_length = len(f"Return code: {return_code_str}")
-    rc_padding = CONTENT_WIDTH - visual_length
-    print(f"{BOLD}{CYAN}║{RESET} {display_rc}{' ' * rc_padding} {BOLD}{CYAN}║{RESET}")
+
+    # Print benchmarking metrics if available
+    if "peak_memory" in metrics and "average_cpu" in metrics:
+        # Add Benchmark title
+        print(f"{BOLD}{CYAN}╠{'─' * BOX_WIDTH}╣{RESET}")
+        benchmark_title = "BENCHMARKS:"
+        benchmark_padding = CONTENT_WIDTH - len(benchmark_title)
+        print(f"{BOLD}{CYAN}║{RESET} {BOLD}{MAGENTA}{benchmark_title}{RESET}{' ' * benchmark_padding} {BOLD}{CYAN}║{RESET}")
+
+        # Fix consistent spacing for metrics
+        memory_text = f"Peak Memory Usage: {metrics['peak_memory']:.2f} MB"
+        memory_padding = CONTENT_WIDTH - len(memory_text)
+        print(f"{BOLD}{CYAN}║{RESET} {memory_text}{' ' * memory_padding} {BOLD}{CYAN}║{RESET}")
+        
+        cpu_text = f"Average CPU Usage: {metrics['average_cpu']:.2f}%"
+        cpu_padding = CONTENT_WIDTH - len(cpu_text)
+        print(f"{BOLD}{CYAN}║{RESET} {cpu_text}{' ' * cpu_padding} {BOLD}{CYAN}║{RESET}")
+
+        # Fixed time formatting
+        time_str = f"{execution_time:.2f}"
+        display_time = f"Execution time: {time_color}{time_str} seconds{RESET}"
+        visual_length = len(f"Execution time: {time_str} seconds")
+        time_padding = CONTENT_WIDTH - visual_length
+        print(f"{BOLD}{CYAN}║{RESET} {display_time}{' ' * time_padding} {BOLD}{CYAN}║{RESET}")
+        
+        # Fixed return code formatting
+        return_code_str = str(metrics['return_code'])
+        display_rc = f"Return code: {status_color}{return_code_str}{RESET}"
+        visual_length = len(f"Return code: {return_code_str}")
+        rc_padding = CONTENT_WIDTH - visual_length
+        print(f"{BOLD}{CYAN}║{RESET} {display_rc}{' ' * rc_padding} {BOLD}{CYAN}║{RESET}")
+
     
     # Print output if requested and available
     if show_output and metrics.get('output'):
+        # Add Benchmark title
         print(f"{BOLD}{CYAN}╠{'─' * BOX_WIDTH}╣{RESET}")
-        output_header = "OUTPUT:"
-        output_padding = CONTENT_WIDTH - len(output_header)
-        print(f"{BOLD}{CYAN}║{RESET} {BOLD}{output_header}{RESET}{' ' * output_padding} {BOLD}{CYAN}║{RESET}")
-        print(f"{BOLD}{CYAN}╠{'─' * BOX_WIDTH}╣{RESET}")
+        output_title = "OUTPUT:"
+        output_padding = CONTENT_WIDTH - len(output_title)
+        print(f"{BOLD}{CYAN}║{RESET} {BOLD}{MAGENTA}{output_title}{RESET}{' ' * output_padding} {BOLD}{CYAN}║{RESET}")
         
         # Split output lines and format them
         output_lines = metrics['output'].split('\n')
@@ -95,12 +118,6 @@ def print_benchmark_results(model_name, metrics, show_output=True, show_error=Tr
             colored_line = f"{RED}{display_line}{RESET}"
             line_padding = CONTENT_WIDTH - len(display_line)  # Use uncolored length for padding
             print(f"{BOLD}{CYAN}║{RESET} {colored_line}{' ' * line_padding} {BOLD}{CYAN}║{RESET}")
-    
-    # Print benchmarking metrics if available
-    if "peak_memory" in metrics and "average_cpu" in metrics:
-        print(f"{BOLD}{CYAN}╠{'─' * BOX_WIDTH}╣{RESET}")
-        print(f"{BOLD}{CYAN}║{RESET} Peak Memory Usage: {metrics['peak_memory']:.2f} MB{' ' * (CONTENT_WIDTH - 25)}{BOLD}{CYAN}║{RESET}")
-        print(f"{BOLD}{CYAN}║{RESET} Average CPU Usage: {metrics['average_cpu']:.2f}%{' ' * (CONTENT_WIDTH - 25)}{BOLD}{CYAN}║{RESET}")
     
     # Summary
     print(f"{BOLD}{CYAN}╠{'─' * BOX_WIDTH}╣{RESET}")
@@ -135,7 +152,7 @@ def print_running_message(model_path):
     model_name = os.path.basename(model_path)
     
     # Print initial message
-    print(f"\n{BOLD}{CYAN}▶ Running model:{RESET} {MAGENTA}{model_name}{RESET}")
+    print(f"{BOLD}{CYAN}▶ Running model:{RESET} {MAGENTA}{model_name}{RESET}")
     
     # Show a brief animation (3 cycles)
     for _ in range(3):
