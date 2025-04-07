@@ -15,6 +15,7 @@ echo 'export PATH=$HOME/.modular/bin:$PATH' >> ~/.zshrc
 magic init optimizer --format mojoproject
 cd optimizer
 magic shell
+exit --> to exit the mojo shell
 mojo hello.mojo
 ```
 
@@ -23,6 +24,7 @@ lunchbox --help
 lunchbox train --model ./test_models/gru_model.py
 lunchbox train --model ./test_models/gru_model.py --output
 lunchbox train --model ./test_models/gru_model.py --output --benchmark
+lunchbox train --model ./test_models/gru_model.py --output --benchmark --optimize mojo
 ```
 
 ## Final tasks
@@ -41,10 +43,12 @@ lunchbox train --model ./test_models/gru_model.py --output --benchmark
 
 ## TODO LIST
 
-- how can i integrate mojo project with this cli tool -- > utilize subprocess to run the mojo command
-
 if inputted model file, i must be able to run the model: flag this stuff!!
 
-- with just normal python
+- default with just normal python
 - with mojo
-- other config
+- other config available?
+
+how can i integrate mojo to automatically run
+`lunchbox train --model ./test_models/gru_model.py --output --benchmark --optimize mojo`
+whenever i run this command. it should automatically run the main.mojo file by starting the magic shell 'magic shell' and running the command 'mojo run main.mojo'
