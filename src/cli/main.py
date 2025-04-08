@@ -17,8 +17,7 @@ def train(
     model = Path(model)
     if model.is_file():
         # Run the model and print the models results based on the command
-        metrics = run_model(model, output, benchmark, optimize)
-        print_benchmark_results(model.name, metrics, show_output=output, show_error=True)
+        run_model(model, output, benchmark, optimize)
     else:
         print(f"Error: Model file {model} does not exist.")
 
