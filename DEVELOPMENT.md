@@ -44,12 +44,10 @@ lunchbox train --model ./test_models/gru_model.py --optimize mojo
 
 ## TODO LIST
 
-if inputted model file, i must be able to run the model: flag this stuff!!
-
-- default with just normal python
-- with mojo
-- other config available?
-
 how can i integrate mojo to automatically run
 `lunchbox train --model ./test_models/gru_model.py --output --benchmark --optimize mojo`
 whenever i run this command. it should automatically run the main.mojo file by starting the magic shell 'magic shell' and running the command 'mojo run main.mojo'
+
+x
+
+how can i decrease the training time of the test_models using mojo?

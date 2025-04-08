@@ -32,7 +32,7 @@ def run_model(model_path, output=False, benchmark=False, optimize=False):
 
         # Run the model using subprocess from the model's directory
         if optimize and optimize.lower() == "mojo":
-            run_mojo(optimize="mojo")
+            run_mojo()
             return  # Exit after running Mojo optimization
         else:
             process = subprocess.Popen(
