@@ -47,7 +47,10 @@ lunchbox train --model ./test_models/gru_model.py --optimize mojo
 how can i integrate mojo to automatically run
 `lunchbox train --model ./test_models/gru_model.py --output --benchmark --optimize mojo`
 whenever i run this command. it should automatically run the main.mojo file by starting the magic shell 'magic shell' and running the command 'mojo run main.mojo'
-
+MAKE A SETUP BASH SCRIPT AND TEST EASIER SETUP
 x
 
-how can i decrease the training time of the test_models using mojo?
+gpu integration
+mojo support
+magic support
+other languages
