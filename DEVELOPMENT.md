@@ -26,6 +26,7 @@ lunchbox train --model ./test_models/gru_model.py --output
 lunchbox train --model ./test_models/gru_model.py --output --benchmark
 lunchbox train --model ./test_models/gru_model.py --output --benchmark --optimize mojo
 lunchbox train --model ./test_models/gru_model.py --optimize mojo
+lunchbox train --model ./test_models/gru_model.py --optimize magic
 ```
 
 ## Final tasks
@@ -54,3 +55,9 @@ gpu integration
 mojo support
 magic support
 other languages
+
+
+
+# Copy each file in the test_models directory into the optimizer directory
+# Install dependencies from requirements.txt
+# run the python file gru_model.py

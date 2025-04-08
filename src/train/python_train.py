@@ -4,6 +4,7 @@ import os
 import psutil
 from .pretty_print import print_running_message, print_benchmark_results
 from .mojo_train import run_mojo
+from .magic_train import run_magic
 
 def run_model(model_path, output=False, benchmark=False, optimize=False):
     """
@@ -40,6 +41,20 @@ def run_model(model_path, output=False, benchmark=False, optimize=False):
             # Collect optimization metrics
             metrics = {
                 "optimization": "mojo",
+                "execution_time": execution_time,
+                "status": "Optimization completed successfully",
+                "return_code": 0  # Add a default return code for successful optimization
+            }
+            print_benchmark_results(model_file, metrics, show_output=output, show_error=True)
+            return metrics
+        elif optimize and optimize.lower() == "magic":
+            run_magic()
+            end_time = time.time()
+            execution_time = end_time - start_time
+
+            # Collect optimization metrics
+            metrics = {
+                "optimization": "magic",
                 "execution_time": execution_time,
                 "status": "Optimization completed successfully",
                 "return_code": 0  # Add a default return code for successful optimization
