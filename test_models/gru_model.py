@@ -1,7 +1,6 @@
 import os
 import torch
 import torch.nn as nn
-import matplotlib.pyplot as plt
 import numpy as np
 import time
 from data_preprocessing import preprocess_data
@@ -102,31 +101,3 @@ with torch.no_grad():
     # Calculate additional metrics if desired
     rmse = np.sqrt(((predictions_actual - y_test_actual) ** 2).mean())
     print(f"Root Mean Square Error (RMSE): ${rmse:.2f}")
-
-# Plot the training and validation loss curves in separate subplots
-plt.figure(figsize=(12, 8))
-
-# Add a title for the entire figure
-plt.suptitle("Bidirectional GRU", fontsize=16)
-
-# Subplot for training loss
-plt.subplot(2, 1, 1)  # 2 rows, 1 column, 1st subplot
-plt.plot(range(1, num_epochs + 1), train_losses, label="Training Loss", color="blue")
-plt.xlabel("Epochs")
-plt.ylabel("Loss")
-plt.title("Training Loss")
-plt.legend()
-plt.grid()
-
-# Subplot for validation loss
-plt.subplot(2, 1, 2)  # 2 rows, 1 column, 2nd subplot
-plt.plot(range(1, num_epochs + 1), val_losses, label="Validation Loss", color="orange")
-plt.xlabel("Epochs")
-plt.ylabel("Loss")
-plt.title("Validation Loss")
-plt.legend()
-plt.grid()
-
-# Adjust layout and show the plots
-plt.tight_layout(rect=[0, 0, 1, 0.95])  # Adjust layout to fit the suptitle
-plt.show()
