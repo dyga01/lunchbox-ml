@@ -62,3 +62,6 @@ and then use python to run on that optimized kernel
 x
 
 magic to compile hybrid python mojo approach
+
+remove training optmizations
+work on deployment
