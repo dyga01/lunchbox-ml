@@ -38,7 +38,7 @@ lunchbox train --model ./test_models/gru_model.py --optimize max
 - implement deploy functionality by automatically generating a dockerfile?
 - test lastly
 
-- make the tool useable, this may include a lot of code that will automatically install models dependencies and logic around this
+- make the tool useable, this may include a lot of code that will automatically install models dependencies and logic around this --> make a setup shell script for this?
 - error handling
 - documentation of everything
 - linting with ruff
@@ -49,19 +49,16 @@ lunchbox train --model ./test_models/gru_model.py --optimize max
 
 ## TODO LIST
 
-how can i integrate mojo to automatically run
-`lunchbox train --model ./test_models/gru_model.py --output --benchmark --optimize mojo`
-whenever i run this command. it should automatically run the main.mojo file by starting the magic shell 'magic shell' and running the command 'mojo run main.mojo'
-MAKE A SETUP BASH SCRIPT AND TEST EASIER SETUP
-gpu integration, mojo support, other languages
-how can i access my gpu to speed up the training of gru_model.py
-[https://docs.modular.com/mojo/manual/gpu/intro-tutorial]
-could i optimize my computers gpu and cpu with mojo and then run the python program with magic? how would i connect to these optimizations?
-can i use mojo to optimize gpu kernel
-and then use python to run on that optimized kernel
-x
+do other tools do this --> onnx
 
-magic to compile hybrid python mojo approach
+Training
 
-remove training optmizations
-work on deployment
+- how can i integrate mojo to automatically run `lunchbox train --model ./test_models/gru_model.py --output --benchmark --optimize mojo`
+- gpu integration
+- magic to compile hybrid python mojo approach
+- other languages --> go
+
+Deployment
+
+- update current pytorch model to be able to make predictions for things.
+- model serve application with docker?
