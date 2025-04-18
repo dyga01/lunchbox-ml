@@ -24,12 +24,6 @@ lunchbox --help
 lunchbox train --model ./test_models/gru_model.py
 lunchbox train --model ./test_models/gru_model.py --output
 lunchbox train --model ./test_models/gru_model.py --output --benchmark
-lunchbox train --model ./test_models/gru_model.py --output --benchmark --optimize mojo
-```
-
-```text
-lunchbox train --model ./test_models/gru_model.py --optimize magic
-lunchbox train --model ./test_models/gru_model.py --optimize max
 ```
 
 ## Final tasks
@@ -49,16 +43,7 @@ lunchbox train --model ./test_models/gru_model.py --optimize max
 
 ## TODO LIST
 
-do other tools do this --> onnx
-
-Training
-
-- how can i integrate mojo to automatically run `lunchbox train --model ./test_models/gru_model.py --output --benchmark --optimize mojo`
-- gpu integration
-- magic to compile hybrid python mojo approach
-- other languages --> go
-
-Deployment
-
-- update current pytorch model to be able to make predictions for things.
-- model serve application with docker?
+- run multiple benchmarks and display results
+- hybrid approach --> call mojo code from python. --> problem is mojo cannot be imported to python, python can be imported to mojo, but there is no library support.
+- give up on mojo, just go for deployment
+- last minute, worst case, just add in magic and compare and benchmark them.
