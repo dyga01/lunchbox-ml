@@ -12,7 +12,7 @@ pip install -r requirements.txt
 
 ## Overview
 
-Lunchbox ML is a lightweight command-line interface (CLI) tool designed to simplify the training and deployment of machine learning models locally. It provides a streamlined workflow for training models and serving predictions, all within a local environment. The tool is particularly useful for developers who want to test and iterate on ML models without relying on cloud-based solutions.
+Lunchbox ML is a lightweight command-line interface (CLI) tool designed to simplify the deployment of machine learning models locally. It provides a streamlined workflow for training models and serving predictions, all within a local environment. The tool is particularly useful for developers who want to test and iterate on smaller ML models without relying on cloud-based solutions.
 
 ## Motivation
 

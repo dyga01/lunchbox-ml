@@ -8,22 +8,17 @@ pip install -e .
 ```
 
 ```text
-curl https://get.modular.com | sh
-curl -ssL https://magic.modular.com/5cf2c264-40cf-42be-bf0f-aa05b5ab6fd1 | bash
-export PATH=$HOME/.modular/bin:$PATH
-echo 'export PATH=$HOME/.modular/bin:$PATH' >> ~/.zshrc
-magic init optimizer --format mojoproject
-cd optimizer
-magic shell
-mojo hello.mojo
-exit --> to exit the mojo shell
-```
-
-```text
 lunchbox --help
 lunchbox train --model ./test_models/gru_model.py
 lunchbox train --model ./test_models/gru_model.py --output
 lunchbox train --model ./test_models/gru_model.py --output --benchmark
+```
+
+```text
+lunchbox serve --model ./test_models/gru_model.pth --backend pytorch
+lunchbox serve --model ./test_models/gru_model.onnx --backend onnx
+lunchbox serve --model ./test_models/gru_model.pth --backend torchserve
+lunchbox serve --model ./test_models/gru_model.mlmodel --backend coreml
 ```
 
 ## Final tasks
@@ -37,13 +32,12 @@ lunchbox train --model ./test_models/gru_model.py --output --benchmark
 - documentation of everything
 - linting with ruff
 - logo
-- finalized readme
+- finalized readme and example commands
 - make it public?
 - license in repo?
+- implement serve functionality for different backends (pytorch, onnx, torchserve, coreml)
 
 ## TODO LIST
 
 - run multiple benchmarks and display results
-- hybrid approach --> call mojo code from python. --> problem is mojo cannot be imported to python, python can be imported to mojo, but there is no library support.
-- give up on mojo, just go for deployment
-- last minute, worst case, just add in magic and compare and benchmark them.
+- serve the model in different ways --> pytorch serve, onnx runtime serve, more

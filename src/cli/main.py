@@ -1,5 +1,5 @@
 from pathlib import Path
-from typing import Optional
+from typing import Optional, Literal
 from typer import Typer, Option
 from src.train.python_train import run_model
 
@@ -20,9 +20,19 @@ def train(
         print(f"Error: Model file {model} does not exist.")
 
 @app.command()
-def deploy(model_name: str = Option(..., "--model", "-m", help="Name of the model to deploy")):
-    """Deploy a machine learning model using Docker."""
-    print(f"Deploying model: {model_name}")
+def serve(
+    model: str = Option(..., "--model", "-m", help="Path to the model file"),
+    backend: str = Option(..., "--backend", "-b", help="Serving backend to use"),
+):
+    """Serve a machine learning model locally."""
+    if backend == "pytorch":
+        print(f"Serving PyTorch model: {model}")
+        # Add logic for PyTorch native serving
+    elif backend == "onnx":
+        print(f"Serving ONNX model: {model}")
+        # Add logic for ONNX runtime serving
+    else:
+        print(f"Error: Unsupported backend '{backend}'")
 
 if __name__ == "__main__":
     app()
