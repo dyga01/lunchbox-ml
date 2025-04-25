@@ -1,0 +1,27 @@
+project_name: AirRate
+description: A simple model that predicts Airbnb ratings based on user inputs.
+
+model:
+  file: main.py
+  trained_data_path: airbnb_rating_predictor.pth
+  feature_scaler_path: featre_scaler.pkl
+
+inputs:
+  - name: accommodates
+    type: float
+  - name: bathrooms
+    type: float
+  - name: bedrooms
+    type: float
+  - name: beds
+    type: float
+  - name: price 
+    type: float
+  - name: amenities_length
+    type: int
+
+outputs:
+  - name: rating
+    type: float
+
+deployment_type: rest_api
