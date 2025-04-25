@@ -2,4 +2,5 @@
 .tool-versions
 lunchbox_ml.egg-info
 __pycache__
-optimizer
+airbnb_rating_predictor.pth
+feature_scaler.pkl

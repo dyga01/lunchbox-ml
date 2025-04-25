@@ -7,20 +7,22 @@ pip install -r requirements.txt
 pip install -e .
 ```
 
-```text
-lunchbox --help
-lunchbox train --model ./test_models/gru_model.py
-lunchbox train --model ./test_models/gru_model.py --output
-lunchbox train --model ./test_models/gru_model.py --output --benchmark
-```
+training models
 
 ```text
-lunchbox serve --model ./test_models/gru_model.pth --backend pytorch
-lunchbox serve --model ./test_models/gru_model.onnx --backend onnx
+lunchbox --help
+lunchbox train --model ./test_model/main.py
+lunchbox train --model ./test_model/main.py --output
+lunchbox train --model ./test_model/main.py --output --benchmark
 ```
+
+deploying models
+
+x
 
 ## Final tasks
 
+- run multiple benchmarks and display results
 - implement train functionality, explore using mojo for optimizations
 - implement deploy functionality by automatically generating a dockerfile?
 - test lastly
@@ -37,5 +39,6 @@ lunchbox serve --model ./test_models/gru_model.onnx --backend onnx
 
 ## TODO LIST
 
-- run multiple benchmarks and display results
-- serve the model in different ways --> pytorch serve, onnx runtime serve, more
+- make my example model be able to be deployed
+- think about the inputs and outputs and make a diagram!!
+- follow new project structure to get base working. make it benchmarkable.
