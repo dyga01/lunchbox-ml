@@ -17,8 +17,6 @@ lunchbox train --model ./test_models/gru_model.py --output --benchmark
 ```text
 lunchbox serve --model ./test_models/gru_model.pth --backend pytorch
 lunchbox serve --model ./test_models/gru_model.onnx --backend onnx
-lunchbox serve --model ./test_models/gru_model.pth --backend torchserve
-lunchbox serve --model ./test_models/gru_model.mlmodel --backend coreml
 ```
 
 ## Final tasks
