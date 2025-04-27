@@ -26,7 +26,7 @@ class AirbnbRatingPredictor(nn.Module):
 
 # Load model and scaler
 model_path = "airbnb_rating_predictor.pth"
-scaler_path = "featre_scaler.pkl"
+scaler_path = "feature_scaler.pkl"
 
 model = AirbnbRatingPredictor(input_dim=6, hidden_size_1=128, hidden_size_2=64, hidden_size_3=32, dropout_rate=0.2)
 model.load_state_dict(torch.load(model_path, map_location=torch.device('cpu')))
@@ -53,5 +53,5 @@ def predict():
     return jsonify({"rating": predicted_rating})
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=5000)
+    app.run(host='0.0.0.0', port=8000)
     

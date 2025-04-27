@@ -4,7 +4,7 @@ description: A simple model that predicts Airbnb ratings based on user inputs.
 model:
   file: main.py
   trained_data_path: airbnb_rating_predictor.pth
-  feature_scaler_path: featre_scaler.pkl
+  feature_scaler_path: feature_scaler.pkl
 
 inputs:
   - name: accommodates

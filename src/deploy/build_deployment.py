@@ -70,7 +70,7 @@ def predict():
     return jsonify({"rating": predicted_rating})
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=5000)
+    app.run(host='0.0.0.0', port=8000)
     """)
 
     # Render the template with the parsed configuration
@@ -89,7 +89,7 @@ if __name__ == "__main__":
     print(f"python {output_path}")
     print("\nTo query the deployed model, use the following command:")
     print("""
-curl -X POST http://127.0.0.1:5000/predict \\
+curl -X POST http://127.0.0.1:8000/predict \\
 -H "Content-Type: application/json" \\
 -d '{"accommodates": 2, "bathrooms": 1, "bedrooms": 1, "beds": 1, "price": 100, "amenities_length": 10}'
     """)
