@@ -2,6 +2,8 @@ from pathlib import Path
 from typing import Optional, Literal
 from typer import Typer, Option
 from src.train.python_train import run_model
+from src.deploy.parse_yml import parse_yaml_file
+from src.deploy.build_deployment import build_deployment_script
 
 app = Typer()
 
@@ -21,18 +23,17 @@ def train(
 
 @app.command()
 def serve(
-    model: str = Option(..., "--model", "-m", help="Path to the model file"),
-    backend: str = Option(..., "--backend", "-b", help="Serving backend to use"),
+    config: str = Option(..., "--config", "-c", help="Path to the config file"),
 ):
     """Serve a machine learning model locally."""
-    if backend == "pytorch":
-        print(f"Serving PyTorch model: {model}")
-        # Add logic for PyTorch native serving
-    elif backend == "onnx":
-        print(f"Serving ONNX model: {model}")
-        # Add logic for ONNX runtime serving
+    config_path = Path(config)
+    if config_path.is_file():
+        # Generate the deployment script
+        output_script_path = config_path.parent / "deployment_script.py"
+        build_deployment_script(config_path, output_script_path)
+        print("You can now run the generated script to serve the model.")
     else:
-        print(f"Error: Unsupported backend '{backend}'")
+        print(f"Error: Config file {config} does not exist.")
 
 if __name__ == "__main__":
     app()

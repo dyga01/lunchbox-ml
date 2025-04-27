@@ -24,4 +24,6 @@ outputs:
   - name: rating
     type: float
 
-deployment_type: rest_api
+deployment: 
+  - name: airbnb_rating_predictor
+    type:  rest_api

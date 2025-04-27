@@ -19,7 +19,7 @@ lunchbox train --model ./test_model/main.py --output --benchmark
 deploying models
 
 ```text
-lunchbox serve ___specify config file path here___
+lunchbox serve --config ./test_model/config.yml
 ```
 
 ## Final tasks
@@ -41,5 +41,4 @@ lunchbox serve ___specify config file path here___
 
 ## TODO LIST
 
-- think about the inputs and outputs and make a diagram!!
 - follow new project structure to get base working. make it benchmarkable.
