@@ -31,7 +31,6 @@ def serve(
         # Generate the deployment script
         output_script_path = config_path.parent / "deployment_script.py"
         build_deployment_script(config_path, output_script_path)
-        print("You can now run the generated script to serve the model.")
     else:
         print(f"Error: Config file {config} does not exist.")
 

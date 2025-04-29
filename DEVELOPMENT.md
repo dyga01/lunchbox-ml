@@ -20,6 +20,7 @@ deploying models
 
 ```text
 lunchbox serve --config ./test_model/config.yml
+lunchbox serve --config ./test_model/config.yml --benchmark
 ```
 
 ## Final tasks

@@ -84,12 +84,28 @@ if __name__ == "__main__":
     with open(output_path, 'w') as file:
         file.write(deployment_script)
 
-    print(f"Deployment script generated at: {output_path}")
-    print("\nTo run the deployment, use the following command:")
-    print(f"python {output_path}")
-    print("\nTo query the deployed model, use the following command:")
-    print("""
-curl -X POST http://127.0.0.1:8000/predict \\
+    # print the deployment instructions
+    print_deployment_instructions(output_path)
+
+def print_deployment_instructions(output_path):
+    """
+    Print formatted deployment instructions for the generated script.
+
+    Args:
+        output_path (str): Path to the generated deployment script.
+    """
+    # ANSI color codes
+    CYAN = "\033[96m"
+    GREEN = "\033[92m"
+    BOLD = "\033[1m"
+    RESET = "\033[0m"
+
+    # Print deployment instructions
+    print(f"\n{BOLD}{CYAN}Deployment script generated at:{RESET} {GREEN}{output_path}{RESET}")
+    print(f"\n{BOLD}{CYAN}To run the deployment, use the following command:{RESET}")
+    print(f"{BOLD}python {output_path}{RESET}")
+    print(f"\n{BOLD}{CYAN}To query the deployed model, use the following command:{RESET}")
+    print(f"""{BOLD}curl -X POST http://127.0.0.1:8000/predict \\
 -H "Content-Type: application/json" \\
--d '{"accommodates": 2, "bathrooms": 1, "bedrooms": 1, "beds": 1, "price": 100, "amenities_length": 10}'
+-d '{{"accommodates": 2, "bathrooms": 1, "bedrooms": 1, "beds": 1, "price": 100, "amenities_length": 10}}'{RESET}
     """)
