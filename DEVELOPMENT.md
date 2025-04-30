@@ -43,3 +43,10 @@ lunchbox serve --config ./test_model/config.yml --benchmark
 ## TODO LIST
 
 - follow new project structure to get base working. make it benchmarkable.
+
+'''
+if benchmark is true
+    then record the time it takes to build the deployment script - just time the file
+    - time it takes to run the deployment script - use subprocess to run the script (dont print the output)
+
+'''

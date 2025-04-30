@@ -1,18 +1,23 @@
 from jinja2 import Template
 from pathlib import Path
 import os
+import time
+import subprocess
 from .parse_yml import parse_yaml_file
 
-def build_deployment_script(yaml_file_path, output_file_path):
+def build_deployment_script(yaml_file_path, benchmark):
     """
     Generates a Python deployment script based on the YAML configuration file.
 
     Args:
         yaml_file_path (str): Path to the YAML configuration file.
-        output_file_path (str): Path to save the generated deployment script.
+        benchmark (bool): Whether to benchmark the script generation and execution.
     """
     # Parse the YAML file
     config = parse_yaml_file(yaml_file_path)
+
+    # Extract the output file path from the YAML configuration
+    output_file_path = config['deployment'][0]['path']
 
     # Define a Jinja2 template for the deployment script
     template = Template("""
@@ -73,6 +78,9 @@ if __name__ == "__main__":
     app.run(host='0.0.0.0', port=8000)
     """)
 
+    # Benchmark: Record the time it takes to build the deployment script
+    start_time = time.time()
+
     # Render the template with the parsed configuration
     deployment_script = template.render(config=config)
 
@@ -84,8 +92,24 @@ if __name__ == "__main__":
     with open(output_path, 'w') as file:
         file.write(deployment_script)
 
-    # print the deployment instructions
+    build_time = time.time() - start_time
+
+    # Print the deployment instructions
     print_deployment_instructions(output_path)
+
+    if benchmark:
+        # Benchmark: Record the time it takes to run the deployment script
+        start_time = time.time()
+        subprocess.run(["python", str(output_path)], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        run_time = time.time() - start_time
+
+        # print the benchmark results
+        GREEN = "\033[92m"
+        BOLD = "\033[1m"
+        RESET = "\033[0m"
+        print(f"{BOLD}{GREEN}Benchmark Results{RESET}")
+        print(f"Time to build the deployment script: {build_time:.4f} seconds")
+        print(f"Time to run the deployment script: {run_time:.4f} seconds\n")
 
 def print_deployment_instructions(output_path):
     """

@@ -26,4 +26,5 @@ outputs:
 
 deployment: 
   - name: airbnb_rating_predictor
+    path: deployment_script.py
     type:  rest_api

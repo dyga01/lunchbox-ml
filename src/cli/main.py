@@ -24,13 +24,13 @@ def train(
 @app.command()
 def serve(
     config: str = Option(..., "--config", "-c", help="Path to the config file"),
+    benchmark: bool = Option(False, "--benchmark", "-b", help="Report serving benchmarks"),
 ):
     """Serve a machine learning model locally."""
     config_path = Path(config)
     if config_path.is_file():
         # Generate the deployment script
-        output_script_path = config_path.parent / "deployment_script.py"
-        build_deployment_script(config_path, output_script_path)
+        build_deployment_script(config_path, benchmark)
     else:
         print(f"Error: Config file {config} does not exist.")
 
