@@ -1,13 +1,35 @@
 # Lunchbox ML: A Lightweight CLI for Local ML Model Deployment
 
+**NOTE**: This project is in the early stages of development and is not yet fully functional.
+
 ## Installation
 
 To get started with Lunchbox ML, clone the repository and install the required dependencies:
 
 ```bash
 git clone https://github.com/dyga01/lunchbox-ml.git
-cd lunchbox-ml
+python3 -m venv .venv
+source .venv/bin/activate
 pip install -r requirements.txt
+pip install -e .
+```
+
+## Usage
+
+### Training Models
+
+```bash
+lunchbox --help
+lunchbox train --model ./test_model/main.py
+lunchbox train --model ./test_model/main.py --output
+lunchbox train --model ./test_model/main.py --output --benchmark
+```
+
+### Deploying Models
+
+```bash
+lunchbox serve --config ./test_model/config.yml
+lunchbox serve --config ./test_model/config.yml --benchmark
 ```
 
 ## Overview
@@ -22,6 +44,5 @@ The motivation behind Lunchbox ML is to address the challenges of deploying mach
 
 The ideal outcome of using Lunchbox ML is to enable users to:
 
-- Train and evaluate machine learning models with minimal configuration.
-- Deploy models locally for testing and inference.
-- Seamlessly integrate the tool into existing workflows for rapid prototyping.
+- Train and benchmark local machine learning models with minimal configuration.
+- Automatically generate code that can be used for basic deployment.

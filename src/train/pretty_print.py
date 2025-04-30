@@ -1,3 +1,5 @@
+"""Printing functions for model benchmarking results and running messages."""
+
 import os
 import time
 

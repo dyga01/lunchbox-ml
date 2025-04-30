@@ -4,3 +4,4 @@ lunchbox_ml.egg-info
 __pycache__
 airbnb_rating_predictor.pth
 feature_scaler.pkl
+deployment_script.py

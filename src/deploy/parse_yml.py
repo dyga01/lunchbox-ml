@@ -1,3 +1,5 @@
+"""Parse YAML configuration file."""
+
 import yaml
 
 def parse_yaml_file(yaml_file_path):

@@ -1,3 +1,5 @@
+"""Python script to run a model using subprocess and monitor its performance."""
+
 import subprocess
 import time
 import os

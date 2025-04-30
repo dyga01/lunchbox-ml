@@ -1,3 +1,5 @@
+"""Builds a deployment script for the trained model."""
+
 from jinja2 import Template
 from pathlib import Path
 import os

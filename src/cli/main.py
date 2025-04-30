@@ -1,3 +1,5 @@
+"""CLI for training and serving machine learning models."""
+
 from pathlib import Path
 from typing import Optional, Literal
 from typer import Typer, Option
@@ -35,4 +37,5 @@ def serve(
         print(f"Error: Config file {config} does not exist.")
 
 if __name__ == "__main__":
+    """Entry point for the CLI application. Initializes the Typer app and listens for commands."""
     app()
